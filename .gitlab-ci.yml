@@ -1,0 +1,48 @@
+stages:
+  - install
+  - compile
+  - test
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHA"
+  paths:
+    - deps/
+    - _build/
+    - priv/static/
+  policy: pull-push
+
+variables:
+  GIT_CLEAN_FLAGS: "-ffdx -e deps/ -e _build/"
+
+compile_phoenix:
+  stage: compile
+  script:
+    - module load erlang
+    - module load elixir
+    - mix deps.get
+    - mix compile
+    - mix phx.digest
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: never
+
+test_phoenix:
+  stage: test
+  cache:
+    key: "test-cache-$CI_COMMIT_REF_SLUG"
+    paths:
+      - deps/
+      - _build/test/
+    policy: pull-push
+  script:
+    - module load erlang
+    - module load elixir
+    - rm -rf _build/test
+    - mix deps.get
+    - MIX_ENV=test mix ecto.reset
+    - mix test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: never

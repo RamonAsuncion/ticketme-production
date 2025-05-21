@@ -1,0 +1,67 @@
+defmodule Ticketme.DevicesTest do
+  use Ticketme.DataCase
+
+  alias Ticketme.Devices
+
+  describe "devices" do
+    alias Ticketme.Devices.Device
+
+    import Ticketme.DevicesFixtures
+
+    @invalid_attrs %{device_name: nil, device_id: nil, device_type: nil, is_active: nil, last_active_at: nil}
+
+    test "list_devices/0 returns all devices" do
+      device = device_fixture()
+      assert Devices.list_devices() == [device]
+    end
+
+    test "get_device!/1 returns the device with given id" do
+      device = device_fixture()
+      assert Devices.get_device!(device.id) == device
+    end
+
+    test "create_device/1 with valid data creates a device" do
+      valid_attrs = %{device_name: "some device_name", device_id: "some device_id", device_type: "some device_type", is_active: true, last_active_at: ~U[2025-02-26 00:43:00Z]}
+
+      assert {:ok, %Device{} = device} = Devices.create_device(valid_attrs)
+      assert device.device_name == "some device_name"
+      assert device.device_id == "some device_id"
+      assert device.device_type == "some device_type"
+      assert device.is_active == true
+      assert device.last_active_at == ~U[2025-02-26 00:43:00Z]
+    end
+
+    test "create_device/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Devices.create_device(@invalid_attrs)
+    end
+
+    test "update_device/2 with valid data updates the device" do
+      device = device_fixture()
+      update_attrs = %{device_name: "some updated device_name", device_id: "some updated device_id", device_type: "some updated device_type", is_active: false, last_active_at: ~U[2025-02-27 00:43:00Z]}
+
+      assert {:ok, %Device{} = device} = Devices.update_device(device, update_attrs)
+      assert device.device_name == "some updated device_name"
+      assert device.device_id == "some updated device_id"
+      assert device.device_type == "some updated device_type"
+      assert device.is_active == false
+      assert device.last_active_at == ~U[2025-02-27 00:43:00Z]
+    end
+
+    test "update_device/2 with invalid data returns error changeset" do
+      device = device_fixture()
+      assert {:error, %Ecto.Changeset{}} = Devices.update_device(device, @invalid_attrs)
+      assert device == Devices.get_device!(device.id)
+    end
+
+    test "delete_device/1 deletes the device" do
+      device = device_fixture()
+      assert {:ok, %Device{}} = Devices.delete_device(device)
+      assert_raise Ecto.NoResultsError, fn -> Devices.get_device!(device.id) end
+    end
+
+    test "change_device/1 returns a device changeset" do
+      device = device_fixture()
+      assert %Ecto.Changeset{} = Devices.change_device(device)
+    end
+  end
+end

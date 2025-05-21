@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "phoenixframework.phoenix",
+    "jakebecker.elixir-ls",
+    "animus-coop.vscode-elixir-mix-formatter",
+    "aaron-bond.better-comments",
+    "dbaeumer.vscode-eslint",
+    "ritvyk.heex-html",
+    "wix.vscode-import-cost",
+    "pkief.material-icon-theme"
+  ]
+}

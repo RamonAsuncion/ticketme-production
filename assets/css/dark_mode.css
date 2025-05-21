@@ -1,0 +1,24 @@
+/* Apply smooth transition when switching themes */
+html {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Dark Mode Styles */
+.dark {
+  @apply bg-gray-900 text-white;
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+/* #TODO: Add more overrides for the text etc. */
+
+/* Dark mode button styles */
+.dark-mode-toggle {
+  @apply flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-800 transition-all duration-300;
+}
+
+.dark .dark-mode-toggle {
+  @apply bg-gray-700 text-white;
+}

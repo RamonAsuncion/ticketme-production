@@ -1,0 +1,38 @@
+/* Iter font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./dark_mode.css"; /* Import the dark mode styles */
+
+
+.dark-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px; /* Fully rounded */
+  background-color: #f3f4f6; /* Light mode background */
+  color: #374151; /* Light mode icon color */
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .dark-mode-toggle {
+  background-color: #1f2937; /* Dark mode background */
+  color: #f9fafb; /* Dark mode icon color */
+}
+
+/* This file is for your main application CSS */
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}

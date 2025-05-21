@@ -1,0 +1,9 @@
+websocket-client
+gpiozero
+uuid
+pynput
+adafruit-circuitpython-dht
+adafruit-circuitpython-ahtx0
+adafruit-blinka
+adafruit-circuitpython-matrixkeypad
+opencv-python
